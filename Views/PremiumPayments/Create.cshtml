@@ -1,0 +1,190 @@
+@model InsuranceManagmentSystem.Models.PremiumPayment
+
+@{
+    ViewData["Title"] = "Create Premium Payment";
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .payment-page {
+        padding: 35px;
+    }
+
+    .payment-header {
+        background: linear-gradient(135deg, #1261a0, #073b70);
+        color: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+    }
+
+        .payment-header h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        .payment-header p {
+            margin: 0;
+            opacity: .9;
+        }
+
+    .payment-form {
+        max-width: 750px;
+        margin: auto;
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    }
+
+        .payment-form h2 {
+            margin-top: 0;
+            color: #16324f;
+        }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 13px;
+        border: 1px solid #d5dce5;
+        border-radius: 9px;
+        font-size: 15px;
+        box-sizing: border-box;
+        background: white;
+    }
+
+        .form-control:focus {
+            border-color: #1261a0;
+            outline: none;
+        }
+
+    .payment-btn {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 9px;
+        background: linear-gradient(90deg, #1261a0, #198754);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 20px;
+        color: #1261a0;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .validation {
+        color: #dc3545;
+        font-size: 13px;
+    }
+</style>
+
+<div class="payment-page">
+
+    <div class="payment-header">
+        <h1>💰 Premium Payment</h1>
+        <p>Record a premium payment for an insurance policy</p>
+    </div>
+
+    <div class="payment-form">
+
+        <h2>➕ Payment Details</h2>
+
+        <form asp-action="Create">
+
+            <div asp-validation-summary="ModelOnly" class="validation"></div>
+
+            <div class="form-group">
+                <label asp-for="PolicyID">Policy</label>
+
+                <select asp-for="PolicyID"
+                        class="form-control"
+                        asp-items="ViewBag.PolicyID">
+
+                    <option value="">-- Select Policy --</option>
+
+                </select>
+
+                <span asp-validation-for="PolicyID"
+                      class="validation"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Amount">Payment Amount</label>
+
+                <input asp-for="Amount"
+                       class="form-control"
+                       type="number"
+                       step="0.01"
+                       placeholder="Enter payment amount" />
+
+                <span asp-validation-for="Amount"
+                      class="validation"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PaymentDate">Payment Date</label>
+
+                <input asp-for="PaymentDate"
+                       class="form-control"
+                       type="date" />
+
+                <span asp-validation-for="PaymentDate"
+                      class="validation"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PaymentStatus">Payment Status</label>
+
+                <select asp-for="PaymentStatus"
+                        class="form-control">
+
+                    <option value="">-- Select Status --</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Failed">Failed</option>
+
+                </select>
+
+                <span asp-validation-for="PaymentStatus"
+                      class="validation"></span>
+            </div>
+
+            <button type="submit" class="payment-btn">
+                💾 Save Payment
+            </button>
+
+        </form>
+
+        <a asp-action="Index" class="back-btn">
+            ← Back to Payments
+        </a>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

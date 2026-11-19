@@ -1,0 +1,136 @@
+﻿@model IEnumerable<InsuranceManagmentSystem.Models.AgentPremiumViewModel>
+
+@{
+    ViewData["Title"] = "Agent Wise Premium";
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .page {
+        padding: 30px;
+    }
+
+    .title {
+        background: linear-gradient(135deg, #1261a0, #073b70);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+    }
+
+    .title h2 {
+        margin: 0;
+    }
+
+    .table-box {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: #1261a0;
+        color: white;
+        padding: 12px;
+        text-align: left;
+    }
+
+    td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background: #f1f6fb;
+    }
+
+    .amount {
+        font-weight: bold;
+    }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background: #1261a0;
+        color: white;
+        text-decoration: none;
+        border-radius: 7px;
+    }
+
+    .back-btn:hover {
+        background: #073b70;
+        color: white;
+    }
+</style>
+
+<div class="page">
+
+    <div class="title">
+        <h2>👨‍💼 Agent Wise Premium</h2>
+        <p>View premium payments received through insurance agents</p>
+    </div>
+
+    <div class="table-box">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Agent Name</th>
+                    <th>Policy ID</th>
+                    <th>Payment ID</th>
+                    <th>Premium Amount</th>
+                    <th>Payment Date</th>
+                    <th>Payment Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.AgentName</td>
+                            <td>@item.PolicyID</td>
+                            <td>@item.PaymentID</td>
+                            <td class="amount">₹ @item.Amount</td>
+                            <td>@item.PaymentDate.ToString("dd-MM-yyyy")</td>
+                            <td>@item.PaymentStatus</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" style="text-align:center;">
+                            No agent-wise premium record found.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a asp-controller="Home"
+           asp-action="Dashboard"
+           class="customer360-btn">
+            🏠 Back to Dashboard
+        </a>
+    </div>
+
+</div>

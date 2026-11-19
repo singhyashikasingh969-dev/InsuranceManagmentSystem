@@ -1,0 +1,184 @@
+@model InsuranceManagmentSystem.Models.Claim
+
+@{
+    ViewData["Title"] = "Create";
+}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .claim-page {
+        padding: 35px;
+    }
+
+    .claim-header {
+        background: linear-gradient(135deg, #1261a0, #073b70);
+        color: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+    }
+
+        .claim-header h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        .claim-header p {
+            margin: 0;
+            opacity: .9;
+        }
+
+    .claim-form {
+        max-width: 750px;
+        margin: auto;
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    }
+
+        .claim-form h2 {
+            margin-top: 0;
+            color: #16324f;
+        }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 13px;
+        border: 1px solid #d5dce5;
+        border-radius: 9px;
+        font-size: 15px;
+        box-sizing: border-box;
+        background: white;
+    }
+
+        .form-control:focus {
+            border-color: #1261a0;
+            outline: none;
+        }
+
+    .save-btn {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 9px;
+        background: linear-gradient(90deg, #1261a0, #198754);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 20px;
+        color: #1261a0;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .validation {
+        color: #dc3545;
+        font-size: 13px;
+    }
+</style>
+
+<h1>Create</h1>
+
+<h4>Claim</h4>
+<hr />
+<div class="claim-page">
+
+    <div class="claim-header">
+        <h1>📝 Claim Management</h1>
+        <p>Submit a new insurance claim</p>
+    </div>
+
+    <div class="claim-form">
+
+        <h2>➕ Claim Details</h2>
+
+        <form asp-action="Create">
+
+            <div asp-validation-summary="ModelOnly" class="validation"></div>
+
+            <div class="form-group">
+                <label asp-for="PolicyID">Policy</label>
+                <select asp-for="PolicyID"
+                        class="form-control"
+                        asp-items="ViewBag.PolicyID">
+                    <option value="">-- Select Policy --</option>
+                </select>
+                <span asp-validation-for="PolicyID" class="validation"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ClaimDate">Claim Date</label>
+                <input asp-for="ClaimDate"
+                       class="form-control"
+                       type="date" />
+                <span asp-validation-for="ClaimDate" class="validation"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ClaimAmount">Claim Amount</label>
+                <input asp-for="ClaimAmount"
+                       class="form-control"
+                       type="number"
+                       step="0.01"
+                       placeholder="Enter claim amount" />
+                <span asp-validation-for="ClaimAmount" class="validation"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ClaimReason">Claim Reason</label>
+                <input asp-for="ClaimReason"
+                       class="form-control"
+                       placeholder="Enter claim reason" />
+                <span asp-validation-for="ClaimReason" class="validation"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ClaimStatus">Claim Status</label>
+                <select asp-for="ClaimStatus" class="form-control">
+                    <option value="">-- Select Status --</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+                <span asp-validation-for="ClaimStatus" class="validation"></span>
+            </div>
+
+            <button type="submit" class="save-btn">
+                💾 Save Claim
+            </button>
+
+        </form>
+
+        <a asp-action="Index" class="back-btn">
+            ← Back to Claims
+        </a>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

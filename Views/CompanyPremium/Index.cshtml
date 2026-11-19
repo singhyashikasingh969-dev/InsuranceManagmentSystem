@@ -1,0 +1,250 @@
+﻿@model IEnumerable<InsuranceManagmentSystem.Models.CompanyPremiumViewModel>
+
+@{
+    ViewData["Title"] = "Company Wise Premium";
+
+    var companies = Model
+        .GroupBy(x => x.CompanyName)
+        .Select(g => new
+        {
+            CompanyName = g.Key,
+            TotalPremium = g.Sum(x => x.Amount)
+        })
+        .OrderByDescending(x => x.TotalPremium)
+        .ToList();
+
+    var grandTotal = companies.Sum(x => x.TotalPremium);
+
+    var highestCompany = companies.FirstOrDefault();
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .company-page {
+        padding: 30px;
+    }
+
+    .header-box {
+        background: linear-gradient(135deg, #1261a0, #073b70);
+        color: white;
+        padding: 25px;
+        border-radius: 14px;
+        margin-bottom: 25px;
+    }
+
+        .header-box h2 {
+            margin: 0 0 8px 0;
+        }
+
+        .header-box p {
+            margin: 0;
+        }
+
+    .top-company {
+        background: white;
+        border-left: 6px solid #7b2cbf;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+        .top-company h3 {
+            margin-top: 0;
+            color: #7b2cbf;
+        }
+
+        .top-company .company-name {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .top-company .percentage {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+    .table-box {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: #7b2cbf;
+        color: white;
+        padding: 13px;
+        text-align: left;
+    }
+
+    td {
+        padding: 13px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background: #f7f2fb;
+    }
+
+    .company-icon {
+        font-size: 20px;
+        margin-right: 8px;
+    }
+
+    .amount {
+        font-weight: bold;
+    }
+
+    .percentage-cell {
+        font-weight: bold;
+    }
+
+    .progress {
+        width: 150px;
+        height: 8px;
+        background: #e5e5e5;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 6px;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: #7b2cbf;
+        border-radius: 10px;
+    }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 11px 22px;
+        background: #1261a0;
+        color: white;
+        text-decoration: none;
+        border-radius: 7px;
+    }
+
+        .back-btn:hover {
+            background: #073b70;
+            color: white;
+        }
+</style>
+
+<div class="company-page">
+
+    <div class="header-box">
+        <h2>🏢 Company Wise Premium</h2>
+        <p>View premium collection by insurance company</p>
+    </div>
+
+    @if (highestCompany != null && grandTotal > 0)
+    {
+        var highestPercentage =
+            (highestCompany.TotalPremium / grandTotal) * 100;
+
+        <div class="top-company">
+            <h3>🏆 Highest Premium Company</h3>
+
+            <div class="company-name">
+                🏢 @highestCompany.CompanyName
+            </div>
+
+            <div class="percentage">
+                @highestPercentage.ToString("0.0")% of Total Premium
+            </div>
+
+            <div>
+                Total Premium:
+                <strong>₹ @highestCompany.TotalPremium.ToString("N2")</strong>
+            </div>
+        </div>
+    }
+
+    <div class="table-box">
+
+        <h3>🏢 Top Insurance Companies</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Company Name</th>
+                    <th>Total Premium</th>
+                    <th>Percentage</th>
+                    …
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @if (companies.Any() && grandTotal > 0)
+                {
+                    int rank = 1;
+
+                    foreach (var company in companies)
+                    {
+                        var percentage =
+                            (company.TotalPremium / grandTotal) * 100;
+
+                        <tr>
+                            <td>@rank</td>
+
+                            <td>
+                                <span class="company-icon">🏢</span>
+                                <strong>@company.CompanyName</strong>
+                            </td>
+
+                            <td class="amount">
+                                ₹ @company.TotalPremium.ToString("N2")
+                            </td>
+
+                            <td class="percentage-cell">
+                                @percentage.ToString("0.0")%
+
+                                <div class="progress">
+                                    <div class="progress-bar"
+                                         style="width:@percentage%">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        rank++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" style="text-align:center;">
+                            No company-wise premium record found.
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a asp-controller="Home"
+           asp-action="Dashboard"
+           class="customer360-btn">
+            🏠 Back to Dashboard
+        </a>
+    </div>
+
+</div>

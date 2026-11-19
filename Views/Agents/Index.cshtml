@@ -1,0 +1,318 @@
+@model IEnumerable<InsuranceManagmentSystem.Models.Agent>
+
+@{
+    ViewData["Title"] = "Agent Management";
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .agent-page {
+        padding: 30px;
+    }
+
+    /* Header */
+    .agent-header {
+        background: linear-gradient(135deg, #1261a0, #073b70);
+        color: white;
+        padding: 25px 30px;
+        border-radius: 14px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+    }
+
+        .agent-header h1 {
+            margin: 0 0 8px 0;
+            font-size: 30px;
+        }
+
+        .agent-header p {
+            margin: 0;
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+    /* Top Buttons */
+    .top-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .create-btn {
+        display: inline-block;
+        padding: 11px 20px;
+        background: #198754;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        .create-btn:hover {
+            background: #146c43;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    /* Table Box */
+    .table-box {
+        background: white;
+        padding: 20px;
+        border-radius: 14px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        min-width: 900px;
+        border-collapse: collapse;
+    }
+
+    thead th {
+        background: #1261a0;
+        color: white;
+        padding: 14px 12px;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    tbody td {
+        padding: 13px 12px;
+        border-bottom: 1px solid #e1e5ea;
+        color: #333;
+        font-size: 14px;
+    }
+
+    tbody tr:hover {
+        background: #f1f6fb;
+    }
+
+    /* Agent Name */
+    .agent-name {
+        font-weight: bold;
+        color: #1261a0;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .action-btn {
+        display: inline-block;
+        padding: 7px 11px;
+        border-radius: 6px;
+        color: white;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .edit-btn {
+        background: #0d6efd;
+    }
+
+        .edit-btn:hover {
+            background: #084298;
+            color: white;
+        }
+
+    .details-btn {
+        background: #6f42c1;
+    }
+
+        .details-btn:hover {
+            background: #59339d;
+            color: white;
+        }
+
+    .delete-btn {
+        background: #dc3545;
+    }
+
+        .delete-btn:hover {
+            background: #b02a37;
+            color: white;
+        }
+
+    /* Back Dashboard */
+    .dashboard-section {
+        margin-top: 25px;
+    }
+
+    .back-btn {
+        display: inline-block;
+        padding: 11px 20px;
+        background: #1261a0;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        .back-btn:hover {
+            background: #073b70;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    /* Empty Data */
+    .no-data {
+        text-align: center;
+        padding: 25px;
+        color: #777;
+        font-weight: bold;
+    }
+
+    /* Mobile */
+    @@media (max-width: 768px) {
+        .agent-page {
+            padding: 15px;
+        }
+
+        .agent-header {
+            padding: 20px;
+        }
+
+            .agent-header h1 {
+                font-size: 24px;
+            }
+
+        .table-box {
+            padding: 12px;
+        }
+    }
+</style>
+
+
+<div class="agent-page">
+
+    <!-- Header -->
+    <div class="agent-header">
+        <h1>👨‍💼 Agent Management</h1>
+        <p>Manage insurance agents and their c…company information</p>
+    </div>
+
+
+    <!-- Buttons -->
+    <div class="top-buttons">
+
+        <a asp-action="Create" class="create-btn">
+            ➕ Add New Agent
+        </a>
+
+    </div>
+
+
+    <!-- Agent Table -->
+    <div class="table-box">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Agent Name</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Company Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td class="agent-name">
+                                @item.AgentName
+                            </td>
+
+                            <td>
+                                @item.Mobile
+                            </td>
+
+                            <td>
+                                @item.Email
+                            </td>
+
+                            <td>
+                                @item.Address
+                            </td>
+
+                            <td>
+                                @item.CompanyName
+                            </td>
+
+                            <td>
+                                <div class="action-buttons">
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.AgentID"
+                                       class="action-btn edit-btn">
+                                        ✏️ Edit
+                                    </a>
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.AgentID"
+                                       class="action-btn details-btn">
+                                        👁️ Details
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.AgentID"
+                                       class="action-btn delete-btn">
+                                        🗑️ Delete
+                                    </a>
+
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="no-data">
+                            No agent record found.
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- Back to Dashboard -->
+    <div class="dashboard-section">
+
+        <a asp-controller="Home"
+           asp-action="Dashboard"
+           class="back-btn">
+            🏠 Back to Dashboard
+        </a>
+
+    </div>
+
+</div>

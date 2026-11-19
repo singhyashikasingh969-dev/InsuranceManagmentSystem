@@ -1,0 +1,193 @@
+﻿@model InsuranceManagmentSystem.Models.Customer
+
+@{
+    ViewData["Title"] = "Delete Customer";
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .delete-page {
+        padding: 35px;
+    }
+
+    .delete-header {
+        background: linear-gradient(135deg, #dc3545, #8b1e2d);
+        color: white;
+        padding: 28px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+    }
+
+        .delete-header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .delete-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+    .delete-box {
+        background: white;
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        max-width: 850px;
+    }
+
+    .warning {
+        background: #fff3cd;
+        color: #664d03;
+        border: 1px solid #ffecb5;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        font-weight: bold;
+    }
+
+    .customer-info {
+        margin-bottom: 25px;
+    }
+
+    .info-row {
+        display: flex;
+        padding: 12px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .info-label {
+        width: 180px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .info-value {
+        color: #555;
+    }
+
+    .button-section {
+        margin-top: 25px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .delete-btn {
+        background: #dc3545;
+        color: white;
+        padding: 11px 22px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .delete-btn:hover {
+            background: #b02a37;
+        }
+
+    .back-btn {
+        background: #1261a0;
+        color: white;
+        padding: 11px 22px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .back-btn:hover {
+            background: #073b70;
+            color: white;
+        }
+</style>
+
+<div class="delete-page">
+
+    <div class="delete-header">
+        <h1>🗑️ Delete Customer</h1>
+        <p>Remove customer and all related records</p>
+    </div>
+
+    <div class="delete-box">
+
+        <div class="warning">
+            ⚠️ Warning: Deleting this customer will also delete all
+            related Policies, Premium Payments and Claims.
+        </div>
+
+        <div class="customer-info">
+
+            <div class="info-row">
+                <div class="info-label">Customer ID</div>
+                <div class="info-value">@Model.CustomerID</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Customer Name</div>
+                <div class="info-value">@Model.Name</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Date of Birth</div>
+                <div class="info-value">
+                    @Model.DateOfBirth.ToString("dd-MM-yyyy")
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Gender</div>
+                <div class="info-value">@Model.Gender</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Mobile</div>
+                <div class="info-value">@Model.Mobile</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Email</div>
+                <div class="info-value">@Model.Email</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Address</div>
+                <div class="info-value">@Model.Address</div>
+            </div>
+
+        </div>
+
+        <form asp-action="Delete" method="post">
+
+            <input type="hidden" asp-for="CustomerID" />
+
+            <div class="button-section">
+
+                <button type="submit"
+                        class="delete-btn"
+                        onclick="return confirm('Are you sure you want to delete this customer and all related records?');">
+                    🗑️ Delete Customer
+                </button>
+
+                <a asp-action="Details" class="back-btn">
+                    ↩️ Cancel
+                </a>
+
+                <a asp-controller="Home"
+                   asp-action="Dashboard"
+                   class="back-btn">
+                    🏠 Dashboard
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

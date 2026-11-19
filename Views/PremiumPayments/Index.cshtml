@@ -1,0 +1,239 @@
+@model IEnumerable<InsuranceManagmentSystem.Models.PremiumPayment>
+
+@{
+    ViewData["Title"] = "Premium Payment Management";
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .payment-page {
+        padding: 35px;
+    }
+
+    .payment-header {
+        background: linear-gradient(135deg, #1261a0, #073b70);
+        color: white;
+        padding: 28px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0,0,0,.10);
+    }
+
+        .payment-header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .payment-header p {
+            margin: 0;
+            opacity: .9;
+        }
+
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+        .top-bar h2 {
+            color: #16324f;
+            margin: 0;
+        }
+
+    .create-btn {
+        background: #198754;
+        color: white;
+        padding: 11px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .create-btn:hover {
+            background: #146c43;
+            color: white;
+        }
+
+    .table-box {
+        background: white;
+        padding: 25px;
+        border-radius: 18px;
+        box-shadow: 0 8px 25px rgba(0,0,0,.08);
+        overflow-x: auto;
+    }
+
+    .payment-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .payment-table th {
+            background: #1261a0;
+            color: white;
+            padding: 14px;
+            text-align: left;
+        }
+
+        .payment-table td {
+            padding: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .payment-table tr:hover {
+            background: #f5f9fd;
+        }
+
+    .status {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .paid {
+        background: #d1e7dd;
+        color: #0f5132;
+    }
+
+    .pending {
+        background: #fff3cd;
+        color: #664d03;
+    }
+
+    .failed {
+        background: #f8d7da;
+        color: #842029;
+    }
+
+    .action-btn {
+        text-decoration: none;
+        margin-right: 8px;
+        font-weight: bold;
+    }
+
+    .edit {
+        color: #1261a0;
+    }
+
+    .details {
+        color: #198754;
+    }
+
+    .delete {
+        color: #dc3545;
+    }
+</style>
+
+<div class="payment-page">
+
+    <div class="payment-header">
+        <h1>💰 Premium Payment Management</h1>
+        <p>Manage all insurance premium payments</p>
+    </div>
+
+    <div class="top-bar">
+        <h2>Payment Records</h2>
+
+        <a asp-action="Create" class="create-btn">
+            ➕ New Payment
+        </a>
+    </div>
+
+    <div class="table-box">
+
+        <table class="payment-table">
+
+            <thead>
+                <tr>
+                    <th>Policy ID</th>
+                    <th>Payment Amount</th>
+                    <th>Payment Date</th>
+                    <th>Payment Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PolicyID)
+                        </td>
+
+                        <td>
+                            ₹@Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+
+                        <td>
+                            @item.PaymentDate.ToString("dd-MM-yyyy")
+                        </td>
+
+                        <td>
+
+                            @if (item.PaymentStatus == "Paid")
+                            {
+                                <span class="status paid">Paid</span>
+                            }
+                            else if (item.PaymentStatus == "Pending")
+                            {
+                                <span class="status pending">Pending</span>
+                            }
+                            else if (item.PaymentStatus == "Failed")
+                            {
+                                <span class="status failed">Failed</span>
+                            }
+                            else
+                            {
+                                <span class="status">@item.PaymentStatus</span>
+                            }
+
+                        </td>
+
+                        <td>
+
+                            <a asp-action="Edit"
+                               asp-route-paymentid="@item.PaymentID"
+                               class="action-btn edit">
+                                Edit
+                            </a>
+
+                            <a asp-action="Details"
+                               asp-route-paymentid="@item.PaymentID"
+                               class="action-btn details">
+                                Details
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-paymentid="@item.PaymentID"
+                               class="action-btn delete">
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+    <div style="margin-top: 20px;">
+        <a asp-controller="Home"
+           asp-action="Dashboard"
+           class="create-btn">
+            🏠 Back to Dashboard
+        </a>
+    </div>
+
+</div>

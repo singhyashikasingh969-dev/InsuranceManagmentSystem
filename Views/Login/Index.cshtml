@@ -1,0 +1,230 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #e8f1ff, #f7fbff);
+    }
+
+    .login-wrapper {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+    }
+
+    .login-card {
+        width: 900px;
+        max-width: 100%;
+        min-height: 520px;
+        display: flex;
+        background: white;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+    }
+
+    .insurance-section {
+        width: 50%;
+        padding: 50px;
+        background: linear-gradient(145deg, #1261a0, #073b70);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .insurance-icon {
+        font-size: 85px;
+        margin-bottom: 20px;
+    }
+
+    .insurance-section h1 {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+
+    .insurance-section p {
+        font-size: 16px;
+        line-height: 1.7;
+        opacity: 0.9;
+    }
+
+    .features {
+        margin-top: 25px;
+        text-align: left;
+    }
+
+    .features div {
+        margin: 12px 0;
+        font-size: 15px;
+    }
+
+    .login-section {
+        width: 50%;
+        padding: 55px 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .login-section h2 {
+        font-size: 30px;
+        margin-bottom: 8px;
+        color: #16324f;
+    }
+
+    .subtitle {
+        color: #777;
+        margin-bottom: 30px;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #34495e;
+    }
+
+    .input-box {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid #d5dce5;
+        border-radius: 10px;
+        outline: none;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+    .input-box:focus {
+        border-color: #1261a0;
+        box-shadow: 0 0 0 3px rgba(18, 97, 160, 0.12);
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #1261a0, #198754);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(18, 97, 160, 0.25);
+    }
+
+    .security-text {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 13px;
+        color: #888;
+    }
+
+    @@media (max-width: 750px) {
+        .login-card {
+            flex-direction: column;
+        }
+
+        .insurance-section,
+        .login-section {
+            width: 100%;
+        }
+
+        .insurance-section {
+            padding: 35px;
+        }
+    }
+</style>
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <!-- Insurance Information -->
+        <div class="insurance-section">
+
+            <div class="insurance-icon">🛡️</div>
+
+            <h1>Insurance Management</h1>
+
+            <p>
+                Securely manage customers, policies, premium payments
+                and insurance claims from one place.
+            </p>
+
+            <div class="features">
+                <div>✓ Customer Management</div>
+                <div>✓ Policy Management</div>
+                <div>✓ Premium Tracking</div>
+                <div>✓ Claim Management</div>
+            </div>
+
+        </div>
+
+
+        <!-- Login Form -->
+        <div class="login-section">
+
+            <h2>Welcome Back!</h2>
+
+            <p class="subtitle">
+                Login to your management portal
+            </p>
+
+            <form method="post">
+
+                <div class="input-group">
+                    <label>Username</label>
+
+                    <input type="text"
+                           name="username"
+                           class="input-box"
+                           placeholder="Enter your username"
+                           required />
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+
+                    <input type="password"
+                           name="password"
+                           class="input-box"
+                           placeholder="Enter your password"
+                           required />
+                </div>
+
+                <button type="submit" class="login-btn">
+                    Login
+                </button>
+
+            </form>
+
+            <div class="security-text">
+                🔒 Your information is securely managed
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+…

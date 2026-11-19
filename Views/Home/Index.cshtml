@@ -1,0 +1,1087 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<style>
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+background: #f4f7fb;
+}
+
+.dashboard {
+padding: 35px;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+background: linear-gradient(135deg, #1261a0, #073b70);
+color: white;
+padding: 30px;
+border-radius: 20px;
+margin-bottom: 30px;
+box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.header h1 {
+margin: 0 0 10px;
+font-size: 32px;
+}
+
+.header p {
+margin: 0;
+opacity: 0.9;
+font-size: 15px;
+}
+
+/* ================= SECTION TITLE ================= */
+
+.section-title {
+margin: 25px 0 15px;
+color: #16324f;
+font-size: 26px;
+}
+
+.section-subtitle {
+color: #777;
+margin-top: -5px;
+margin-bottom: 20px;
+}
+
+/* ================= CARDS ================= */
+
+.cards {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 20px;
+}
+
+.card {
+background: white;
+padding: 25px;
+border-radius: 18px;
+box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+text-align: center;
+transition: 0.3s ease;
+border: 1px solid #e6edf5;
+}
+
+.card:hover {
+transform: translateY(-5px);
+box-shadow: 0 12px 30px rgba(0,0,0,0.13);
+}
+
+.icon {
+font-size: 45px;
+margin-bottom: 12px;
+}
+
+.card h3 {
+margin: 8px 0;
+color: #16324f;
+}
+
+.card p {
+color: #777;
+font-size: 14px;
+min-height: 40px;
+line-height: 1.5;
+}
+
+.card a {
+display: inline-block;
+margin-top: 12px;
+padding: 10px 20px;
+border-radius: 8px;
+background: #1261a0;
+color: white;
+text-decoration: none;
+font-weight: bold;
+transition: 0.2s;
+}
+
+.card a:hover {
+background: #073b70;
+color: white;
+}
+
+/* ================= CUSTOMER 360 ================= */
+
+.customer360-card {
+background: linear-gradient(135deg, #eef6ff, #ffffff);
+border: 1px solid #d6e8ff;
+border-radius: 18px;
+padding: 25px;
+display: flex;
+align-items: center;
+gap: 18px;
+box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+transition: 0.3s ease;
+}
+
+.customer360-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 12px 30px rgba(0,0,0,0.13);
+}
+
+.card-icon {
+width: 70px;
+height: 70px;
+min-width: 70px;
+border-radius: 18px;
+background: linear-gradient(135deg, #1261a0, #073b70);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 35px;
+}
+
+.card-content {
+text-align: left;
+}
+
+.card-content h2 {
+margin: 0 0 8px;
+color: #073b70;
+font-size: 22px;
+}
+
+.card-content p {
+color: #5f6b7a;
+line-height: 1.5;
+margin-bottom: 15px;
+min-height: auto;
+}
+
+.customer360-btn {
+display: inline-block;
+padding: 11px 20px;
+background: linear-gradient(90deg, #1261a0, #198754);
+color: white;
+text-decoration: none;
+border-radius: 8px;
+font-weight: bold;
+transition: 0.2s;
+}
+
+.customer360-btn:hover {
+color: white;
+transform: translateY(-2px);
+}
+
+/* ================= STATISTICS ================= */
+
+.statistics-section {
+margin-top: 30px;
+background: white;
+padding: 30px;
+border-radius: 18px;
+box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+.statistics-section h2 {
+margin: 0 0 8px;
+… color: #16324f;
+font-size: 26px;
+}
+
+.statistics-subtitle {
+margin-top: 0;
+color: #777;
+margin-bottom: 25px;
+}
+
+.statistics-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 20px;
+}
+
+.stat-card {
+background: #f8fbff;
+border: 1px solid #e2eaf3;
+padding: 20px;
+border-radius: 15px;
+display: flex;
+align-items: center;
+gap: 15px;
+transition: 0.3s;
+}
+
+.stat-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.stat-icon {
+font-size: 35px;
+width: 55px;
+height: 55px;
+display: flex;
+align-items: center;
+justify-content: center;
+background: white;
+border-radius: 12px;
+}
+
+.stat-info h3 {
+margin: 0 0 5px;
+color: #1261a0;
+font-size: 22px;
+}
+
+.stat-info p {
+margin: 0;
+color: #666;
+font-size: 13px;
+}
+
+/* ================= COMPANY CARD ================= */
+
+.company-card {
+border: 2px solid #7b2cbf;
+background: linear-gradient(135deg, #ffffff, #f7efff);
+}
+
+.company-card .icon {
+font-size: 45px;
+}
+
+.company-card h3 {
+color: #7b2cbf;
+}
+
+.company-card a {
+background: #7b2cbf;
+}
+
+.company-card a:hover {
+background: #5a189a;
+}
+
+/* ================= AGENT PREMIUM ================= */
+
+.agent-premium-card {
+border: 2px solid #1261a0;
+background: linear-gradient(135deg, #ffffff, #eef6ff);
+}
+
+.agent-premium-card h3 {
+color: #1261a0;
+}
+
+/* ================= REPORT CARD ================= */
+
+.report-card {
+background: linear-gradient(135deg, #ffffff, #f0fff8);
+border: 2px solid #198754;
+}
+
+.report-card h3 {
+color: #198754;
+}
+
+.coming-soon {
+display: inline-block;
+margin-top: 12px;
+padding: 10px 20px;
+border-radius: 8px;
+background: #6c757d;
+color: white;
+font-weight: bold;
+font-size: 14px;
+}
+
+/* ================= CUSTOMER DETAILS ================= */
+
+.claim-details-section {
+margin-top: 30px;
+background: white;
+padding: 30px;
+border-radius: 18px;
+box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+.claim-details-section h2 {
+margin: 0 0 8px;
+color: #16324f;
+font-size: 26px;
+}
+
+.claim-details-section > p {
+color: #777;
+margin-bottom: 25px;
+}
+
+.table-container {
+max-height: 300px;
+overflow-y: auto;
+overflow-x: auto;
+border-radius: 10px;
+border: 1px solid #e2eaf3;
+}
+
+.claim-details-section table {
+width: 100%;
+border-collapse: collapse;
+min-width: 850px;
+}
+
+.claim-details-section th {
+background: #1261a0;
+color: white;
+padding: 14px;
+        … text-align: left;
+        /* Header ko top par fixed rakhega */
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    .claim-details-section td {
+        padding: 13px;
+        border-bottom: 1px solid #e5e5e5;
+        color: #444;
+        background: white;
+    }
+
+    .claim-details-section tr:hover td {
+        background: #f5f9fd;
+    }
+
+    /* ================= SCROLLBAR ================= */
+
+    .table-container::-webkit-scrollbar {
+        width: 9px;
+        height: 9px;
+    }
+
+    .table-container::-webkit-scrollbar-track {
+        background: #edf2f7;
+        border-radius: 10px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+        background: #1261a0;
+        border-radius: 10px;
+    }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #073b70;
+        }
+
+    /* ================= RESPONSIVE ================= */
+
+    @@media (max-width: 1100px) {
+
+        .cards {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .statistics-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @@media (max-width: 900px) {
+
+        .cards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .statistics-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @@media (max-width: 600px) {
+
+        .dashboard {
+            padding: 15px;
+        }
+
+        .cards {
+            grid-template-columns: 1fr;
+        }
+
+        .statistics-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .header h1 {
+            font-size: 25px;
+        }
+
+        .statistics-section,
+        .claim-details-section {
+            padding: 20px;
+        }
+
+        .customer360-card {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .card-content {
+            text-align: center;
+        }
+    }
+</style>
+
+
+<div class="dashboard">
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <div class="header">
+
+        <h1>🛡️ Insurance Management System</h1>
+
+        <p>
+            Welcome to your Insurance Management Dashboard
+        </p>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- 1. MANAGEMENT -->
+    <!-- ================================================= -->
+
+    <h2 class="section-title">
+        🗂️ Management
+    </h2>
+
+    <p class="section-subtitle">
+        Manage customers, policies, payments, claims and agents
+    </p>
+
+
+    <div class="cards">
+
+        <!-- CUSTOMER -->
+
+        <div class="card">
+
+            <div class="icon">👤</div>
+
+            <h3>Customers</h3>
+
+            <p>
+                Manage customer information
+            </p>
+
+            <a asp-controller="Customer"
+               asp-action="Index">
+                Manage
+            </a>
+
+        </div>
+
+
+        <!-- POLICY -->
+
+        <div class="card">
+
+            <div class="icon">📄</div>
+
+            <h3>Policies</h3>
+
+            <p>
+                …  Manage insurance policies
+            </p>
+
+            <a asp-controller="Policies"
+               asp-action="Index">
+                Manage
+            </a>
+
+        </div>
+
+
+        <!-- PREMIUM PAYMENT -->
+
+        <div class="card">
+
+            <div class="icon">💰</div>
+
+            <h3>Premium Payments</h3>
+
+            <p>
+                Track premium payments
+            </p>
+
+            <a asp-controller="PremiumPayments"
+               asp-action="Index">
+                Manage
+            </a>
+
+        </div>
+
+
+        <!-- CLAIM -->
+
+        <div class="card">
+
+            <div class="icon">📋</div>
+
+            <h3>Claims</h3>
+
+            <p>
+                Manage insurance claims
+            </p>
+
+            <a asp-controller="Claims"
+               asp-action="Index">
+                Manage
+            </a>
+
+        </div>
+
+
+        <!-- AGENT MANAGEMENT -->
+
+        <div class="card">
+
+            <div class="icon">👨‍💼</div>
+
+            <h3>Agent Management</h3>
+
+            <p>
+                Manage insurance agents
+            </p>
+
+            <a asp-controller="Agents"
+               asp-action="Index">
+                Manage
+            </a>
+
+        </div>
+
+
+        <!-- CUSTOMER 360 -->
+
+        <div class="customer360-card">
+
+            <div class="card-icon">
+                👤
+            </div>
+
+            <div class="card-content">
+
+                <h2>Customer 360°</h2>
+
+                <p>
+                    View complete customer information,
+                    policies, premium payments and claims
+                    in one place.
+                </p>
+
+                <a asp-controller="Customer360"
+                   asp-action="Index"
+                   class="customer360-btn">
+
+                    View Customer 360° →
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- 2. DASHBOARD STATISTICS -->
+    <!-- ================================================= -->
+
+    <div class="statistics-section">
+
+        <h2>
+            📊 Dashboard Statistics
+        </h2>
+
+        <p class="statistics-subtitle">
+            Overview of your insurance management system
+        </p>
+
+
+        <div class="statistics-grid">
+
+
+            <!-- TOTAL CUSTOMERS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👤
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        @ViewBag.TotalCustomers
+                    </h3>
+
+                    <p>
+                        Total Customers
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL POLICIES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📄
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        @ViewBag.TotalPolicies
+                    </h3>
+
+                    <p>
+                        …    Total Policies
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL PAYMENTS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    💰
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        @ViewBag.TotalPayments
+                    </h3>
+
+                    <p>
+                        Premium Payments
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL CLAIMS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📝
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        @ViewBag.TotalClaims
+                    </h3>
+
+                    <p>
+                        Total Claims
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL PREMIUM -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    💵
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        ₹@ViewBag.TotalPremiumAmount
+                    </h3>
+
+                    <p>
+                        Total Premium Amount
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL CLAIM AMOUNT -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    💸
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        ₹@ViewBag.TotalClaimAmount
+                    </h3>
+
+                    <p>
+                        Total Claim Amount
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PENDING -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        @ViewBag.PendingClaims
+                    </h3>
+
+                    <p>
+                        Pending Claims
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- APPROVED -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        @ViewBag.ApprovedClaims
+                    </h3>
+
+                    <p>
+                        Approved Claims
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- REJECTED -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ❌
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        @ViewBag.RejectedClaims
+                    </h3>
+
+                    <p>
+                        Rejected Cl…  Rejected Claims
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- 3. PREMIUM ANALYSIS -->
+    <!-- ================================================= -->
+
+    <div class="statistics-section">
+
+        <h2>
+            💰 Premium Analysis
+        </h2>
+
+        <p class="statistics-subtitle">
+            Analyse premium collection by agents and insurance companies
+        </p>
+
+
+        <div class="cards">
+
+
+            <!-- AGENT WISE PREMIUM -->
+
+            <div class="card agent-premium-card">
+
+                <div class="icon">
+                    👨‍💼
+                </div>
+
+                <h3>
+                    Agent Wise Premium
+                </h3>
+
+                <p>
+                    View premium collected by each insurance agent
+                </p>
+
+                <a asp-controller="AgentPremium"
+                   asp-action="Index">
+
+                    View Report →
+
+                </a>
+
+            </div>
+
+
+            <!-- COMPANY WISE PREMIUM -->
+
+            <div class="card company-card">
+
+                <div class="icon">
+                    🏢
+                </div>
+
+                <h3>
+                    Company Wise Premium
+                </h3>
+
+                <p>
+                    View premium collected by insurance companies
+                </p>
+
+                <a asp-controller="CompanyPremium"
+                   asp-action="Index">
+
+                    View Report →
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- 4. REPORTS -->
+    <!-- ================================================= -->
+
+    <div class="statistics-section">
+
+        <h2>
+            📑 Reports & Notifications
+        </h2>
+
+        <p class="statistics-subtitle">
+            Generate reports and send customer notifications
+        </p>
+
+
+        <div class="cards">
+
+
+            <!-- EXCEL -->
+
+            <div class="card report-card">
+
+                <div class="icon">
+                    📊
+                </div>
+
+                <h3>
+                    Excel Reports
+                </h3>
+
+                <p>
+                    Generate insurance data reports in Excel format
+                </p>
+
+                <span class="coming-soon">
+                    Coming Soon
+                </span>
+
+            </div>
+
+
+            <!-- SMS -->
+
+            <div class="card">
+
+                <div class="icon">
+                    📱
+                </div>
+
+                <h3>
+                    SMS / Notifications
+                </h3>
+
+                <p>
+                    Send payment and insurance notifications to customers
+                </p>
+
+                <span class="coming-soon">
+                    Coming Soon
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- 5. CUSTOMER DETAILS -->
+    <!-- ================================================= -->
+
+    <div class="claim-details-section">
+
+        <h2>
+            👤 Customer Details
+        </h2>
+
+        <p>
+            Overview of all registered customers
+        </p>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Customer ID
+                        </th>
+
+                        <th>
+                            Name
+                        </th>
+
+                        <th>
+                            Date of Birth
+                        </th>
+
+                        <th>
+                            Gender
+                        </th>
+
+                        <th>
+                            Mobile
+                            /th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Address
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        @foreach (var customer in ViewBag.CustomerDetails)
+                        {
+
+                            <tr>
+
+                                <td>
+                                    @customer.CustomerID
+                                </td>
+
+                                <td>
+                                    @customer.Name
+                                </td>
+
+                                <td>
+                                    @customer.DateOfBirth.ToString("dd-MM-yyyy")
+                                </td>
+
+                                <td>
+                                    @customer.Gender
+                                </td>
+
+                                <td>
+                                    @customer.Mobile
+                                </td>
+
+                                <td>
+                                    @customer.Email
+                                </td>
+
+                                <td>
+                                    @customer.Address
+                                </td>
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- BACK TO DASHBOARD -->
+
+            <div style="margin-top:20px;">
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="customer360-btn">
+
+                    🏠 Back to Dashboard
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>

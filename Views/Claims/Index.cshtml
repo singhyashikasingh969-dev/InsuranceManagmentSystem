@@ -1,0 +1,230 @@
+@model IEnumerable<InsuranceManagmentSystem.Models.Claim>
+
+@{
+    ViewData["Title"] = "Claim Management";
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .claim-page {
+        padding: 35px;
+    }
+
+    .claim-header {
+        background: linear-gradient(135deg, #1261a0, #073b70);
+        color: white;
+        padding: 28px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0,0,0,.10);
+    }
+
+    .claim-header h1 {
+        margin: 0 0 8px;
+        font-size: 30px;
+    }
+
+    .claim-header p {
+        margin: 0;
+        opacity: .9;
+    }
+
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .top-bar h2 {
+        color: #16324f;
+        margin: 0;
+    }
+
+    .create-btn {
+        background: #198754;
+        color: white;
+        padding: 11px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .create-btn:hover {
+        background: #146c43;
+        color: white;
+    }
+
+    .table-box {
+        background: white;
+        padding: 25px;
+        border-radius: 18px;
+        box-shadow: 0 8px 25px rgba(0,0,0,.08);
+        overflow-x: auto;
+    }
+
+    .claim-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .claim-table th {
+        background: #1261a0;
+        color: white;
+        padding: 14px;
+        text-align: left;
+    }
+
+    .claim-table td {
+        padding: 14px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .claim-table tr:hover {
+        background: #f5f9fd;
+    }
+
+    .status {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .pending {
+        background: #fff3cd;
+        color: #664d03;
+    }
+
+    .approved {
+        background: #d1e7dd;
+        color: #0f5132;
+    }
+
+    .rejected {
+        background: #f8d7da;
+        color: #842029;
+    }
+
+    .action-btn {
+        text-decoration: none;
+        margin-right: 8px;
+        font-weight: bold;
+    }
+
+    .edit {
+        color: #1261a0;
+    }
+
+    .details {
+        color: #198754;
+    }
+
+    .delete {
+        color: #dc3545;
+    }
+</style>
+
+<div class="claim-page">
+
+    <div class="claim-header">
+        <h1>📝 Claim Management</h1>
+        <p>Manage all insurance claims</p>
+    </div>
+
+    <div class="top-bar">
+        <h2>Claim Records</h2>
+
+        <a asp-action="Create" class="create-btn">
+            ➕ New Claim
+        </a>
+    </div>
+
+    <div class="table-box">
+
+        <table class="claim-table">
+
+            <thead>
+                <tr>
+                    <th>Policy ID</th>
+                    <th>Claim Date</th>
+                    <th>Claim Amount</th>
+                    <th>Claim Reason</th>
+                    <th>Claim Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PolicyID)
+                        </td>
+
+                        <td>
+                            @item.ClaimDate.ToString("dd-MM-yyyy")
+                        </td>
+
+                        <td>
+                            ₹@item.ClaimAmount
+                        </td>
+
+                        <td>
+                            @item.ClaimReason
+                        </td>
+
+                        <td>
+                            @if (item.ClaimStatus == "Approved")
+                            {
+                                <span class="status approved">Approved</span>
+                            }
+                            else if (item.ClaimStatus == "Pending")
+                            {
+                                <span class="status pending">Pending</span>
+                            }
+                            else if (item.ClaimStatus == "Rejected")
+                            {
+                                <span class="status rejected">Rejected</span>
+                            }
+                            else
+                            {
+                                <span class="status">@item.ClaimStatus</span>
+                            }
+                        </td>
+
+                        <td>
+                            <a asp-action="Edit"
+                               asp-route-claimid="@item.ClaimID"
+                               class="action-btn edit">Edit</a>
+
+                            <a asp-action="Details"
+                               asp-route-claimid="@item.ClaimID"
+                               class="action-btn details">Details</a>
+
+                            <a asp-action="Delete"
+                               asp-route-claimid="@item.ClaimID"
+                               class="action-btn delete">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+    <div style="margin-top: 20px;">
+        <a asp-controller="Home"
+           asp-action="Dashboard"
+           class="create-btn">
+            🏠 Back to Dashboard
+        </a>
+    </div>
+
+</div>

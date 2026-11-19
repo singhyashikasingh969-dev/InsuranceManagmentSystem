@@ -1,0 +1,318 @@
+@model InsuranceManagmentSystem.Models.Agent
+
+@{
+    ViewData["Title"] = "Create Agent";
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .agent-create-page {
+        padding: 30px;
+    }
+
+    /* Header */
+    .page-header {
+        background: linear-gradient(135deg, #1261a0, #073b70);
+        color: white;
+        padding: 25px 30px;
+        border-radius: 14px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+    }
+
+        .page-header h1 {
+            margin: 0 0 8px 0;
+            font-size: 30px;
+        }
+
+        .page-header p {
+            margin: 0;
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+    /* Form Box */
+    .form-box {
+        max-width: 750px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 14px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+
+    .form-title {
+        color: #1261a0;
+        margin-top: 0;
+        margin-bottom: 25px;
+        font-size: 22px;
+        border-bottom: 2px solid #e5edf5;
+        padding-bottom: 12px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 11px 13px;
+        border: 1px solid #ccd6e0;
+        border-radius: 8px;
+        font-size: 14px;
+        box-sizing: border-box;
+        outline: none;
+        transition: 0.3s;
+    }
+
+        .form-control:focus {
+            border-color: #1261a0;
+            box-shadow: 0 0 0 3px rgba(18,97,160,0.12);
+        }
+
+    .text-danger {
+        color: #dc3545;
+        font-size: 13px;
+        margin-top: 5px;
+        display: block;
+    }
+
+    /* Buttons */
+    .button-row {
+        display: flex;
+        gap: 12px;
+        margin-top: 25px;
+        flex-wrap: wrap;
+    }
+
+    .save-btn {
+        border: none;
+        padding: 11px 24px;
+        background: #198754;
+        color: white;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+        .save-btn:hover {
+            background: #146c43;
+            transform: translateY(-2px);
+        }
+
+    .back-agent-btn {
+        display: inline-block;
+        padding: 11px 20px;
+        background: #6c757d;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        .back-agent-btn:hover {
+            background: #495057;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    .dashboard-section {
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .dashboard-btn {
+        display: inline-block;
+        padding: 11px 20px;
+        background: #1261a0;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        .dashboard-btn:hover {
+            background: #073b70;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    /* Mobile */
+    @@media (max-width: 768px) {
+
+        .agent-create-page {
+            padding: 15px;
+        }
+
+        .page-header {
+            padding: 20px;
+        }
+
+            .page-header h1 {
+                font-size: 24px;
+            }
+
+        .form-box {
+            padding: 20px;
+        }
+    }
+</style>
+
+
+<div class="agent-create-page">
+
+    <!-- Header -->
+    <div class="page-header">
+        <h1>👨‍💼 Agent Management</h1>
+        <p>Add a new insurance agent to the system</p>
+    </div>
+
+
+    <!-- Form -->
+    <div class="form-box">
+
+        <h2 class="form-title">➕ Add New Agent</h2>
+
+        <form asp-action="Create">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger">
+            </div>
+
+
+            <!-- Agent Name -->
+            <div class="form-group">
+                <label asp-for="AgentName">
+                    Agent Name
+                </label>
+
+                <input asp-for="AgentName"
+                       class="form-control"
+                       placeholder="Enter agent name" />
+
+                <span asp-validation-for="AgentName"
+                      class="text-danger">
+                </span>
+            </div>
+
+
+            <!-- Mobile -->
+            <div class="form-group">
+                <label asp-for="Mobile">
+                    Mobile Number
+                </label>
+
+                <input asp-for="Mobile"
+                       class="form-control"
+                       placeholder="Enter mobile number" />
+
+                <span asp-validation-for="Mobile"
+                      class="text-danger">
+                </span>
+            </div>
+
+
+            <!-- Email -->
+            <div class="form-group">
+                <label asp-for="Email">
+                    Email Address
+                </label>
+
+                <input asp-for="Email"
+                       type="email"
+                       class="form-control"
+                       placeholder="Enter email address" />
+
+                <span asp-validation-for="Email"
+                      class="text-danger">
+                </span>
+            </div>
+
+
+            <!-- Address -->
+            <div class="form-group">
+                <label asp-for="Address">
+                    Address
+                </label>
+
+                <input asp-for="Address"
+                       class="form-control"
+                       placeholder="Enter agent address" />
+
+                <span asp-validation-for="Address"
+                      class="text-danger">
+                </span>
+            </div>
+
+
+            <!-- Company -->
+            <div class="form-group">
+                <label asp-for="CompanyName">
+                    Company Name
+                </label>
+
+                <input asp-for="CompanyName"
+                       class="form-control"
+                       placeholder="Enter insurance company name" />
+
+                <span asp-validation-for="CompanyName"
+                      class="text-danger">
+                </span>
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="button-row">
+
+                <button type="submit"
+                        class="save-btn">
+                    💾 Save Agent
+                </button>
+
+                <a asp-action="Index"
+                   class="back-agent-btn">
+                    ← Back to Agent Management
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- Dashboard -->
+    <div class="dashboard-section">
+
+        <a asp-controller="Home"
+           asp-action="Dashboard"
+           class="dashboard-btn">
+            🏠 Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

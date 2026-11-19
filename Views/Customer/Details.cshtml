@@ -1,0 +1,400 @@
+﻿@model IEnumerable<InsuranceManagmentSystem.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .customer-page {
+        padding: 30px;
+    }
+
+    .customer-header {
+        background: linear-gradient(135deg, #1261a0, #073b70);
+        color: white;
+        padding: 25px 30px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+    }
+
+        .customer-header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .customer-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+    .message {
+        padding: 13px 18px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        background: #d1e7dd;
+        color: #0f5132;
+        font-weight: bold;
+    }
+
+    .table-box {
+        width: 100%;
+        background: white;
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        /* Horizontal scrolling if required */
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        min-width: 1000px;
+        border-collapse: collapse;
+    }
+
+    thead th {
+        background: #1261a0;
+        color: white;
+        padding: 13px 10px;
+        text-align: left;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    tbody td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #e1e5ea;
+        color: #333;
+        font-size: 13px;
+    }
+
+    tbody tr:hover {
+        background: #f1f6fb;
+    }
+
+    .customer-id {
+        font-weight: bold;
+        color: #1261a0;
+    }
+
+    .customer-name {
+        font-weight: bold;
+    }
+
+    /* Actions */
+    .action-buttons {
+        display: flex;
+        gap: 7px;
+        align-items: center;
+        white-space: nowrap;
+    }
+
+    .action-btn {
+        display: inline-block;
+        padding: 7px 10px;
+        border-radius: 6px;
+        color: white;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: bold;
+        border: none;
+    }
+
+    .actions-column {
+        min-width: 170px;
+        width: 170px;
+        white-space: nowrap;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        white-space: nowrap;
+    }
+
+    .action-btn {
+        display: inline-block;
+        padding: 7px 10px;
+        border-radius: 6px;
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .edit-btn {
+        background: #1261a0;
+    }
+
+    .delete-btn {
+        background: #dc3545;
+    }
+
+    .edit-btn {
+        background: #0d6efd;
+    }
+
+        .edit-btn:hover {
+            background: #084298;
+            color: white;
+        }
+
+    .delete-btn {
+        background: #dc3545;
+    }
+
+        .delete-btn:hover {
+            background: #b02a37;
+            color: white;
+        }
+
+    /* Keep Actions column visible */
+    .actions-column {
+        min-width: 150px;
+    }
+
+    .bottom-buttons {
+        margin-top: 25px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .back-btn {
+        display: inline-block;
+        padding: 11px 20px;
+        background: #1261a0;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+        .back-btn:hover {
+            background: #073b70;
+            color: white;
+        }
+
+    .no-data {
+        text-align: center;
+        padding: 25px;
+        color: #777;
+        font-weight: bold;
+    }
+
+    /* Mobile */
+    @@media (max-width: 700px) {
+
+        .customer-page {
+            padding: 15px;
+        }
+
+        .customer-header {
+            padding: 20px;
+        }
+
+            .customer-header h1 {
+                font-size: 24px;
+            }
+
+        table {
+            width: 100%;
+            min-width: 1000px;
+        }
+    }
+</style>
+
+
+<div class="customer-page">
+
+    <!-- Header -->
+    <div class="customer-header">
+
+        <h1>👥 Customer Details</h1>
+
+        <p>
+            View and manage all registered customers
+        </p>
+
+    </div>
+
+
+    <!-- Success Message -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="message">
+
+            ✅ @TempData["SuccessMessage"]
+
+        </div>
+    }
+
+
+    <!-- Customer Table -->
+    <div class="table-box">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Customer ID</th>
+
+                    <th>Name</th>
+
+                    <th>Date of Birth</th>
+
+                    <th>Gender</th>
+
+                    <th>Mobile</th>
+
+                    <th>Email</th>
+
+                    <th>Address</th>
+
+                    <th class="actions-column">
+                        Actions
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var customer in Model)
+                    {
+                        <tr>
+
+                            <!-- Customer ID -->
+                            <td class="customer-id">
+                                @customer.CustomerID
+                            </td>
+
+
+                            <!-- Name -->
+                            <td class="customer-name">
+                                @customer.Name
+                            </td>
+
+
+                            <!-- Date of Birth -->
+                            <td>
+                                @customer.DateOfBirth.ToString("dd-MM-yyyy")
+                            </td>
+
+
+                            <!-- Gender -->
+                            <td>
+                                @customer.Gender
+                            </td>
+
+
+                            <!-- Mobile -->
+                            <td>
+                                @customer.Mobile
+                            </td>
+
+
+                            <!-- Email -->
+                            <td>
+                                @customer.Email
+                            </td>
+
+
+                            <!-- Address -->
+                            <td>
+                                @customer.Address
+                            </td>
+
+
+                            <!-- Actions -->
+                            <td class="actions-column">
+
+                                <div class="action-buttons">
+
+                                    <!-- Edit -->
+                                    <a asp-controller="Customer"
+                                       asp-action="Edit"
+                                       asp-route-id="@customer.CustomerID"
+                                       class="action-btn edit-btn">
+
+                                        ✏️ Edit
+
+                                    </a>
+
+
+                                    <!-- Delete -->
+                                    <a asp-controller="Customer"
+                                       asp-action="Delete"
+                                       asp-route-id="@customer.CustomerID"
+                                       class="action-btn delete-btn">
+
+                                        🗑️ Delete
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+
+                        <td colspan="8" class="no-data">
+
+                            No customer record found.
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- Bottom Buttons -->
+    <div class="bottom-buttons">
+
+        <!-- Add Customer -->
+        <a asp-controller="Customer"
+           asp-action="Create"
+           class="back-btn">
+
+            ➕ Add New Customer
+
+        </a>
+
+
+        <!-- Dashboard -->
+        <a asp-controller="Home"
+           asp-action="Dashboard"
+           class="back-btn">
+
+            🏠 Back to Dashboard
+
+        </a>
+
+    </div>
+
+</div>

@@ -1,0 +1,227 @@
+﻿@model InsuranceManagmentSystem.Models.Customer
+
+@{
+    ViewData["Title"] = "Edit Customer";
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .customer-page {
+        padding: 35px;
+    }
+
+    .customer-header {
+        background: linear-gradient(135deg, #1261a0, #073b70);
+        color: white;
+        padding: 28px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+    }
+
+        .customer-header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .customer-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+    .form-box {
+        background: white;
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        max-width: 850px;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #333;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 11px;
+        border: 1px solid #ccd5df;
+        border-radius: 7px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+        .form-control:focus {
+            border-color: #1261a0;
+            outline: none;
+            box-shadow: 0 0 5px rgba(18,97,160,0.2);
+        }
+
+    .button-section {
+        margin-top: 25px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .update-btn {
+        background: #198754;
+        color: white;
+        padding: 11px 22px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .update-btn:hover {
+            background: #146c43;
+        }
+
+    .back-btn {
+        background: #1261a0;
+        color: white;
+        padding: 11px 22px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .back-btn:hover {
+            background: #073b70;
+            color: white;
+        }
+
+    .text-danger {
+        color: #dc3545;
+        font-size: 13px;
+    }
+
+    .validation-summary-errors {
+        color: #dc3545;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="customer-page">
+
+    <div class="customer-header">
+        <h1>✏️ Update Customer</h1>
+        <p>Update customer information</p>
+    </div>
+
+    <div class="form-box">
+
+        <form asp-action="Edit" method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="validation-summary-errors">
+            </div>
+
+            <input type="hidden" asp-for="CustomerID" />
+
+            <div class="form-group">
+                <label asp-for="Name">Customer Name</label>
+                <input asp-for="Name"
+                       class="form-control"
+                       placeholder="Enter customer name" />
+                <span asp-validation-for="Name"
+                      class="text-danger">
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DateOfBirth">Date of Birth</label>
+                <input asp-for="DateOfBirth"
+                       type="date"
+                       class="form-control" />
+                <span asp-validation-for="DateOfBirth"
+                      class="text-danger">
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Gender">Gender</label>
+                <select asp-for="Gender" class="form-control">
+                    <option value="">-- Select Gender --</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <span asp-validation-for="Gender"
+                      class="text-danger">
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Mobile">Mobile</label>
+                <input asp-for="Mobile"
+                       class="form-control"
+                       placeholder="Enter mobile number" />
+                <span asp-validation-for="Mobile"
+                      class="text-danger">
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email"
+                       type="email"
+                       class="form-control"
+                       placeholder="Enter email address" />
+                <span asp-validation-for="Email"
+                      class="text-danger">
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address">Address</label>
+                <textarea asp-for="Address"
+                          class="form-control"
+                          rows="4"
+                          placeholder="Enter address">
+                </textarea>
+                <span asp-validation-for="Address"
+                      class="text-danger">
+                </span>
+            </div>
+
+            <div class="button-section">
+
+                <button type="submit" class="update-btn">
+                    💾 Update Customer
+                </button>
+
+                <a asp-action="Details" class="back-btn">
+                    ↩️ Back to Customer Details
+                </a>
+
+                <a asp-controller="Home"
+                   asp-action="Dashboard"
+                   class="back-btn">
+                    🏠 Dashboard
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

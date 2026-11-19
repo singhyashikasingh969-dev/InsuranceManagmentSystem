@@ -1,0 +1,203 @@
+@model IEnumerable<InsuranceManagmentSystem.Models.Policy>
+
+@{
+    ViewData["Title"] = "Policy Management";
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+    }
+
+    .policy-page {
+        padding: 35px;
+    }
+
+    .policy-header {
+        background: linear-gradient(135deg, #1261a0, #073b70);
+        color: white;
+        padding: 28px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+    }
+
+        .policy-header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .policy-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .create-btn {
+        background: #198754;
+        color: white;
+        padding: 11px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .table-box {
+        background: white;
+        padding: 25px;
+        border-radius: 18px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        overflow-x: auto;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th {
+            background: #1261a0;
+            color: white;
+            padding: 13px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 13px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .table tr:hover {
+            background: #f5f9fd;
+        }
+
+    .action-btn {
+        text-decoration: none;
+        margin-right: 8px;
+        font-weight: bold;
+    }
+
+    .edit {
+        color: #1261a0;
+    }
+
+    .details {
+        color: #198754;
+    }
+
+    .delete {
+        color: #dc3545;
+    }
+</style>
+
+<div class="policy-page">
+
+    <div class="policy-header">
+        <h1>📄 Policy Management</h1>
+        <p>Manage all insurance policies</p>
+    </div>
+
+    <div class="top-bar">
+        <h2>Insurance Policies</h2>
+
+        <a asp-action="Create" class="create-btn">
+            ➕ Create New Policy
+        </a>
+    </div>
+
+    <div class="table-box">
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Agent Name</th>
+                    <th>Policy Type</th>
+                    <th>Premium Amount</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Actions</th>
+                    
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerID)
+                        </td>
+                        <td>
+                            @if (item.AgentID.HasValue &&
+                                 ViewBag.Agents.ContainsKey(item.AgentID.Value))
+                            {
+                                @ViewBag.Agents[item.AgentID.Value]
+                            }
+                            else
+                            {
+                                <span>Direct Customer</span>
+                            }
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PolicyType)
+                        </td>
+
+                        <td>
+                            ₹@Html.DisplayFor(modelItem => item.PremiumAmount)
+                        </td>
+
+                        <td>
+                            @item.StartDate.ToString("dd-MM-yyyy")
+                        </td>
+
+                        <td>
+                            @(item.EndDate.HasValue
+                                ? item.EndDate.Value.ToString("dd-MM-yyyy")
+                                : "N/A")
+                        </td>
+
+                        <td>
+                            <a asp-action="Edit"
+                               asp-route-policyid="@item.PolicyID"
+                               class="action-btn edit">Edit</a>
+
+                            <a asp-action="Details"
+                               asp-route-policyid="@item.PolicyID"
+                               class="action-btn details">Details</a>
+
+                            <a asp-action="Delete"
+                               asp-route-policyid="@item.PolicyID"
+                               class="action-btn delete">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+    <div style="margin-top: 20px;">
+        <a asp-controller="Home"
+           asp-action="Dashboard"
+           class="create-btn">
+            🏠 Back to Dashboard
+        </a>
+    </div>
+
+</div>
+
+
+
+
